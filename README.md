@@ -69,8 +69,7 @@ The following technologies are installed, available, or planned for
 expanded use as Axiom develops:
 
 - Docker Desktop and containerized workloads
-- VMware virtualization
-- VirtualBox virtualization
+- Oracle VirtualBox virtualization
 - Ansible-based infrastructure automation
 - Additional virtualized Linux and Windows systems
 
