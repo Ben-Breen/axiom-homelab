@@ -195,8 +195,10 @@ User-supplied `/system resource print` output, reported on 2026-11-11:
 The collection time and build timestamp timezone were not supplied. Uptime,
 free resources, CPU load, and write counters describe this sample. Uptime
 is 96 days, 19 hours, 11 minutes, and 6 seconds since boot; it does not
-establish uninterrupted network connectivity. Hardware offload still needs
-verification from the bridge configuration.
+establish uninterrupted network connectivity. A separate bridge-port report
+on 2026-11-11 confirms hardware-offload flags on all 26 bridge ports, with
+`ether2` and `ether23` active. See the verified bridge-port snapshot in
+[`networking.md`](networking.md).
 
 The model supports dual boot with RouterOS or SwOS. Operating system
 guidance, verification commands, logical configuration, port assignments,

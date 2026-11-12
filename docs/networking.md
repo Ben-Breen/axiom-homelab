@@ -71,19 +71,53 @@ The CRS326 provides the primary wired switching layer for Axiom.
 Hardware revision, serial number, and reported RouterBOOT firmware versions
 are recorded in [`hardware.md`](hardware.md).
 
-Logical configuration, port assignments, uplinks, VLANs, management
-configuration, and other operational settings will be documented as those
-configurations are implemented and verified.
+The bridge-port snapshot below records verified port membership and flags.
+Connected-device assignments, uplink identity, VLAN configuration, management
+configuration, and other operational settings will be documented as verified.
 
 Configuration details should not be inferred solely from the capabilities of
 the hardware.
+
+#### Verified Bridge-Port Snapshot
+
+User-supplied `/interface bridge port print` output, reported on 2026-11-11,
+shows all 24 Ethernet ports and both SFP+ ports in the bridge named `bridge`.
+Every entry has `hw=yes` and the `H` hardware-offload flag. `ether2` and
+`ether23` are active; the remaining 24 entries also carry `I` (inactive).
+
+| Interface(s) | Reported flags | Observed state |
+| --- | --- | --- |
+| `ether1` | `IH` | Inactive; hardware-offload flag present |
+| `ether2` | `H` | Active; hardware offload active |
+| `ether3` through `ether22` | `IH` | Inactive; hardware-offload flag present |
+| `ether23` | `H` | Active; hardware offload active |
+| `ether24` | `IH` | Inactive; hardware-offload flag present |
+| `sfp-sfpplus1`, `sfp-sfpplus2` | `IH` | Inactive; hardware-offload flag present |
+
+The `H` flag confirms bridge hardware offload, rather than merely the
+requested `hw=yes` setting. See
+[MikroTik's hardware-offload documentation](https://manual.mikrotik.com/docs/bridging-and-switching/).
+
+Shared values across all 26 entries:
+
+- `bridge=bridge`, `hw=yes`, `horizon=none`
+- `pvid=1`, `frame-types=admit-all`
+- `trusted=no`, `trusted-ra=no`, `trusted-dhcpv6=no`
+- `fast-leave=no`, `bpdu-guard=no`
+- `edge=auto`, `point-to-point=auto`
+- Comment: `defconf`
+
+The report does not identify connected devices, negotiated speeds, or which
+active port is the gateway uplink. Bridge-level `vlan-filtering` and the
+bridge VLAN table were not supplied; PVID 1 and `admit-all` alone do not
+establish VLAN filtering or segmentation behavior.
 
 #### Operating System Guidance
 
 **Status:** RouterOS `7.23.3 (stable)` is confirmed as the running OS as of
 the user report on 2026-11-11. The recommendation is to retain RouterOS for
-managed switching. The saved Boot OS setting and hardware-offload state
-still require verification.
+managed switching. Bridge hardware offload is confirmed by the bridge-port
+snapshot above. The saved Boot OS setting still requires verification.
 
 The CRS326 supports either RouterOS or SwOS through
 [MikroTik's dual-boot feature](https://manual.mikrotik.com/hardware/crs326-24g-2s-plus-rm/).
