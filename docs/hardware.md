@@ -139,6 +139,9 @@ and the residential fiber internet service.
 - 2 SFP+ ports
 - Rack-mount form factor
 - Managed switching capabilities
+- ARM CPU, 2 cores at 800 MHz (`arm` architecture)
+- 512 MiB RAM
+- 16 MiB internal flash storage
 
 The CRS326 provides managed Ethernet switching for the Axiom Homelab.
 
@@ -151,11 +154,49 @@ The CRS326 provides managed Ethernet switching for the Axiom Homelab.
 | Firmware type | `dx3230L` |
 | Factory RouterBOOT firmware | `7.19.6` |
 | Current RouterBOOT firmware | `7.23.3` |
+| Running operating system | RouterOS `7.23.3 (stable)` |
+| Reported `factory-software` | `6.44.6` |
 
 MikroTik defines the RouterBOARD factory/current firmware fields as
 [RouterBOOT bootloader versions](https://help.mikrotik.com/docs/spaces/ROS/pages/40992878/RouterBOARD).
-These values do not establish the running RouterOS package version.
-The active operating system and its version still require verification.
+The separate `/system resource print` output supplied on 2026-11-11 confirms
+RouterOS `7.23.3 (stable)` is running. Its version matches the reported
+current RouterBOOT version; they remain separate software components.
+
+MikroTik defines `factory-software` as the minimum RouterOS version in its
+[resource field documentation](https://help.mikrotik.com/docs/spaces/ROS/pages/40992875/Resource).
+The reported value `6.44.6` is distinct from factory RouterBOOT firmware
+`7.19.6`.
+
+#### Resource Snapshot
+
+User-supplied `/system resource print` output, reported on 2026-11-11:
+
+```text
+                  uptime: 13w5d19h11m6s
+                 version: 7.23.3 (stable)
+              build-time: 2026-07-30 11:17:12
+        factory-software: 6.44.6
+             free-memory: 439.8MiB
+            total-memory: 512.0MiB
+                     cpu: ARM
+               cpu-count: 2
+           cpu-frequency: 800MHz
+                cpu-load: 0%
+          free-hdd-space: 3044.0KiB
+         total-hdd-space: 16.0MiB
+ write-sect-since-reboot: 13173
+        write-sect-total: 13975
+       architecture-name: arm
+              board-name: CRS326-24G-2S+
+                platform: MikroTik
+```
+
+The collection time and build timestamp timezone were not supplied. Uptime,
+free resources, CPU load, and write counters describe this sample. Uptime
+is 96 days, 19 hours, 11 minutes, and 6 seconds since boot; it does not
+establish uninterrupted network connectivity. Hardware offload still needs
+verification from the bridge configuration.
 
 The model supports dual boot with RouterOS or SwOS. Operating system
 guidance, verification commands, logical configuration, port assignments,

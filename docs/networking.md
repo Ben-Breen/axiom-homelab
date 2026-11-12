@@ -64,6 +64,9 @@ affects Axiom.
 
 **Device name:** `BARDCORE-SW1`
 
+**Current operating system:** RouterOS `7.23.3 (stable)`, confirmed from
+user-supplied `/system resource print` output reported on 2026-11-11.
+
 The CRS326 provides the primary wired switching layer for Axiom.
 Hardware revision, serial number, and reported RouterBOOT firmware versions
 are recorded in [`hardware.md`](hardware.md).
@@ -77,8 +80,10 @@ the hardware.
 
 #### Operating System Guidance
 
-**Status:** Recommendation recorded on 2026-11-11; the active boot OS and
-running OS version have not yet been verified.
+**Status:** RouterOS `7.23.3 (stable)` is confirmed as the running OS as of
+the user report on 2026-11-11. The recommendation is to retain RouterOS for
+managed switching. The saved Boot OS setting and hardware-offload state
+still require verification.
 
 The CRS326 supports either RouterOS or SwOS through
 [MikroTik's dual-boot feature](https://manual.mikrotik.com/hardware/crs326-24g-2s-plus-rm/).
@@ -89,7 +94,7 @@ Only one operating system runs at a time.
 | RouterOS | Recommended for Axiom's learning and automation goals: CLI/SSH, WinBox, scripting, configuration exports, and detailed diagnostics. It can serve as a Layer 2 switch. |
 | SwOS | Suitable when simple browser-based administration of VLANs, ports, link aggregation, and other switch functions is the priority. |
 
-The recommendation is to use RouterOS for managed switching while retaining
+The recommendation is to retain RouterOS for managed switching while keeping
 the Calix as the current gateway. Use one hardware-offloaded bridge; this
 switch supports bridge VLAN filtering with hardware offload when VLANs are
 introduced. Check the `H` flag on active bridge ports with
@@ -97,7 +102,8 @@ introduced. Check the `H` flag on active bridge ports with
 traffic to use the CPU. See
 [MikroTik's bridge hardware-offload guidance](https://manual.mikrotik.com/docs/bridging-and-switching/).
 
-To verify the inventory while running RouterOS, use these read-only commands:
+To refresh the inventory and verify remaining settings in RouterOS, use
+these read-only commands:
 
 ```routeros
 /system identity print
