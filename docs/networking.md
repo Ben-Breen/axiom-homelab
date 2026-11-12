@@ -72,8 +72,9 @@ Hardware revision, serial number, and reported RouterBOOT firmware versions
 are recorded in [`hardware.md`](hardware.md).
 
 The bridge-port snapshot below records verified port membership and flags.
-Connected-device assignments, uplink identity, VLAN configuration, management
-configuration, and other operational settings will be documented as verified.
+VLAN configuration is pending, as confirmed by the owner on 2026-11-11.
+Connected-device assignments, uplink identity, management configuration, and
+other operational settings will be documented as verified.
 
 Configuration details should not be inferred solely from the capabilities of
 the hardware.
@@ -108,9 +109,11 @@ Shared values across all 26 entries:
 - Comment: `defconf`
 
 The report does not identify connected devices, negotiated speeds, or which
-active port is the gateway uplink. Bridge-level `vlan-filtering` and the
-bridge VLAN table were not supplied; PVID 1 and `admit-all` alone do not
-establish VLAN filtering or segmentation behavior.
+active port is the gateway uplink. The owner confirmed on 2026-11-11 that
+VLANs have not yet been configured. The reported PVID 1 and `admit-all`
+values describe the current port settings; VLAN segmentation remains
+planned. Bridge-level `vlan-filtering` and the bridge VLAN table were not
+included in the supplied output.
 
 #### Operating System Guidance
 
@@ -206,8 +209,11 @@ network-interface speeds.
 
 ## Network Segmentation
 
-No VLAN or network-segmentation architecture is documented as Current until it
-has been implemented and verified.
+**Status:** Planned. The owner confirmed on 2026-11-11 that VLANs have not yet
+been configured on `BARDCORE-SW1`.
+
+The current bridge-port report shows all 26 ports with `pvid=1` and
+`frame-types=admit-all`. VLAN design and implementation are pending.
 
 Future segmentation may separate infrastructure according to operational or
 security requirements.
