@@ -18,8 +18,8 @@ interpreted as deployed infrastructure.
 The Axiom network currently uses the residential fiber connection and Calix
 GigaSpire GS4220E as the primary gateway and wireless access point.
 
-The MikroTik CRS326-24G-2S+RM provides managed Ethernet switching for the
-homelab network.
+The MikroTik CRS326-24G-2S+RM (`BARDCORE-SW1`) provides managed Ethernet
+switching for the homelab network.
 
 At a high level:
 
@@ -29,7 +29,7 @@ Residential Fiber
   |
 Calix GigaSpire GS4220E
   |
-MikroTik CRS326-24G-2S+RM
+BARDCORE-SW1 (MikroTik CRS326-24G-2S+RM)
   |
   +-- ASUS NUC 14 Pro Plus
   |
@@ -62,7 +62,11 @@ affects Axiom.
 
 **Role:** Primary managed Ethernet switch
 
+**Device name:** `BARDCORE-SW1`
+
 The CRS326 provides the primary wired switching layer for Axiom.
+Hardware revision, serial number, and reported RouterBOOT firmware versions
+are recorded in [`hardware.md`](hardware.md).
 
 Logical configuration, port assignments, uplinks, VLANs, management
 configuration, and other operational settings will be documented as those
@@ -70,6 +74,56 @@ configurations are implemented and verified.
 
 Configuration details should not be inferred solely from the capabilities of
 the hardware.
+
+#### Operating System Guidance
+
+**Status:** Recommendation recorded on 2026-11-11; the active boot OS and
+running OS version have not yet been verified.
+
+The CRS326 supports either RouterOS or SwOS through
+[MikroTik's dual-boot feature](https://manual.mikrotik.com/hardware/crs326-24g-2s-plus-rm/).
+Only one operating system runs at a time.
+
+| Option | Fit for BARDCORE-SW1 |
+| --- | --- |
+| RouterOS | Recommended for Axiom's learning and automation goals: CLI/SSH, WinBox, scripting, configuration exports, and detailed diagnostics. It can serve as a Layer 2 switch. |
+| SwOS | Suitable when simple browser-based administration of VLANs, ports, link aggregation, and other switch functions is the priority. |
+
+The recommendation is to use RouterOS for managed switching while retaining
+the Calix as the current gateway. Use one hardware-offloaded bridge; this
+switch supports bridge VLAN filtering with hardware offload when VLANs are
+introduced. Check the `H` flag on active bridge ports with
+`/interface bridge port print`. Some features disable offload and cause
+traffic to use the CPU. See
+[MikroTik's bridge hardware-offload guidance](https://manual.mikrotik.com/docs/bridging-and-switching/).
+
+To verify the inventory while running RouterOS, use these read-only commands:
+
+```routeros
+/system identity print
+/system routerboard print
+/system resource print
+/system routerboard settings print
+/system device-mode print
+/interface bridge port print
+```
+
+Record the running RouterOS version from `/system resource print` separately
+from RouterBOOT firmware in `/system routerboard print`. If running SwOS,
+record its version from the SwOS interface instead.
+
+To change OS, use **System > RouterBOARD > Settings > Boot OS** in RouterOS,
+then reboot. In SwOS, use **System > Boot RouterOS** to return. On RouterOS
+7.17 and later, device-mode can restrict this transition. Check
+`/system device-mode print`; if `routerboard=no`, enabling it with
+`/system device-mode update routerboard=yes` requires physical confirmation
+and causes a reboot. Follow the device's prompt; a normal software reboot
+does not satisfy physical confirmation. See
+[MikroTik's device-mode documentation](https://manual.mikrotik.com/docs/system-information-and-utilities/device-mode/).
+
+Before changing OS, save the existing configuration and arrange local
+management access during the outage. Back up and verify configuration for
+each OS separately, including management access, VLANs, and forwarding.
 
 ## Raspberry Pi Networking
 

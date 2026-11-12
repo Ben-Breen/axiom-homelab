@@ -43,7 +43,7 @@ Residential Fiber
    |
 Calix GigaSpire GS4220E
    |
-MikroTik CRS326-24G-2S+RM
+BARDCORE-SW1 (MikroTik CRS326-24G-2S+RM)
    |
    +-- ASUS NUC 14 Pro Plus
    |
@@ -61,8 +61,8 @@ MikroTik CRS326-24G-2S+RM
 
 Not all components shown above are currently deployed.
 
-The ASUS NUC 14 Pro Plus, Calix GigaSpire GS4220E, and MikroTik
-CRS326-24G-2S+RM are Current components.
+The ASUS NUC 14 Pro Plus, Calix GigaSpire GS4220E, and `BARDCORE-SW1`
+(MikroTik CRS326-24G-2S+RM) are Current components.
 
 The Raspberry Pi systems, Raspberry Pi NAS platform, and NETGEAR GS208v2
 are presently Available rather than deployed.
@@ -98,8 +98,8 @@ It connects the Axiom environment to the residential fiber service.
 
 ### MikroTik CRS326-24G-2S+RM
 
-The MikroTik CRS326-24G-2S+RM provides the primary managed Ethernet
-switching layer for Axiom.
+`BARDCORE-SW1`, the MikroTik CRS326-24G-2S+RM, provides the primary
+managed Ethernet switching layer for Axiom.
 
 Core-connected systems such as the administrative workstation and planned
 network storage connect through this switching layer.

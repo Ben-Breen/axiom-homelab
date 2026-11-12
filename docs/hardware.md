@@ -131,6 +131,8 @@ and the residential fiber internet service.
 **Status:** Current  
 **Role:** Managed Ethernet switch
 
+**Device name:** `BARDCORE-SW1`
+
 **Hardware:**
 
 - 24 Gigabit Ethernet ports
@@ -140,9 +142,25 @@ and the residential fiber internet service.
 
 The CRS326 provides managed Ethernet switching for the Axiom Homelab.
 
-Its logical network configuration, port assignments, uplinks, VLANs,
-management configuration, and topology are documented separately in
-`networking.md`.
+**Device inventory reported on 2026-11-11:**
+
+| Field | Reported value |
+| --- | --- |
+| Hardware revision | `r2` |
+| Serial number | `HKH0AWGBYRR` |
+| Firmware type | `dx3230L` |
+| Factory RouterBOOT firmware | `7.19.6` |
+| Current RouterBOOT firmware | `7.23.3` |
+
+MikroTik defines the RouterBOARD factory/current firmware fields as
+[RouterBOOT bootloader versions](https://help.mikrotik.com/docs/spaces/ROS/pages/40992878/RouterBOARD).
+These values do not establish the running RouterOS package version.
+The active operating system and its version still require verification.
+
+The model supports dual boot with RouterOS or SwOS. Operating system
+guidance, verification commands, logical configuration, port assignments,
+uplinks, VLANs, management configuration, and topology belong in
+[`networking.md`](networking.md).
 
 ---
 
