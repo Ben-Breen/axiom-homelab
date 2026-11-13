@@ -63,9 +63,8 @@ Not all components shown above are currently deployed.
 
 The ASUS NUC 14 Pro Plus, UCG-Ultra, Calix GigaSpire GS4220E, and
 `BARDCORE-SW1` (MikroTik CRS326-24G-2S+RM) are Current components.
-The Calix provides Wi-Fi access; its physical attachment is not shown
-because its uplink has not yet been verified. The ISP handoff and gateway
-uplink port assignments also remain unverified.
+The Calix provides Wi-Fi access. This diagram shows logical roles; the
+physical cable and port map is still to be documented.
 
 The Raspberry Pi systems, Raspberry Pi NAS platform, and NETGEAR GS208v2
 are presently Available rather than deployed.
@@ -94,16 +93,15 @@ of the Axiom environment is configured, documented, and evaluated.
 
 ### Ubiquiti Cloud Gateway Ultra (UCG-Ultra)
 
-The UCG-Ultra is the current gateway for Axiom, as confirmed by the owner
-on 2026-11-12. Detailed WAN connectivity and gateway configuration remain
-to be documented from the actual device.
+The UCG-Ultra is Axiom's primary gateway. WAN connectivity and detailed
+gateway settings are still to be documented in
+[`networking.md`](networking.md).
 
 ### Calix GigaSpire GS4220E
 
-The Calix GigaSpire GS4220E currently serves as a Wi-Fi access point, as
-confirmed by the owner on 2026-11-12. Its previous gateway role has moved
-to the UCG-Ultra. Its physical uplink and access-point settings remain
-unverified.
+The Calix GigaSpire GS4220E provides Wi-Fi access. Its previous gateway
+role has moved to the UCG-Ultra. Access-point settings and uplink details
+are still to be documented in [`networking.md`](networking.md).
 
 ### MikroTik CRS326-24G-2S+RM
 

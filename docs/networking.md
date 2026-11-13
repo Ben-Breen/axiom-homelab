@@ -17,8 +17,9 @@ interpreted as deployed infrastructure.
 
 The Axiom network uses the residential fiber connection with a Ubiquiti
 Cloud Gateway Ultra (UCG-Ultra) as its current gateway. The Calix GigaSpire
-GS4220E currently serves as a Wi-Fi access point. Both roles were confirmed
-by the owner on 2026-11-12.
+GS4220E provides Wi-Fi access.
+
+**Gateway and Wi-Fi roles updated:** 2026-11-12
 
 The MikroTik CRS326-24G-2S+RM (`BARDCORE-SW1`) provides managed Ethernet
 switching for the homelab network.
@@ -37,9 +38,8 @@ BARDCORE-SW1 (MikroTik CRS326-24G-2S+RM)
   |
   +-- Additional Ethernet-connected systems as deployed
 
-The ISP handoff, gateway uplink port assignments, and the Calix's physical
-attachment have not yet been verified. The Calix's Wi-Fi role is documented
-below without assigning it an unverified connection in this overview.
+This is a logical overview. The physical cable and port map, including the
+ISP handoff and Calix uplink, is still to be documented.
 
 The Raspberry Pi systems are currently Available rather than deployed and
 therefore are not represented as active network nodes.
@@ -52,12 +52,11 @@ therefore are not represented as active network nodes.
 
 **Role:** Primary gateway for the Axiom Homelab
 
-The owner confirmed on 2026-11-12 that the gateway role now belongs to the
-UCG-Ultra, replacing the Calix in that role.
+The UCG-Ultra is Axiom's primary gateway, replacing the Calix in that role.
 
 WAN addressing and ISP handoff, LAN addressing, DHCP and DNS configuration,
 firewall policy, firmware version, and gateway-to-switch port assignments
-remain to be verified from the actual environment.
+are still to be documented.
 
 ## Wireless Access
 
@@ -67,10 +66,9 @@ remain to be verified from the actual environment.
 
 **Role:** Wi-Fi access point
 
-The owner confirmed on 2026-11-12 that the Calix's current role is Wi-Fi
-access. The UCG-Ultra performs the gateway role. The Calix's operating-mode
-settings, wireless configuration, management address, and physical uplink
-have not yet been verified.
+The Calix provides Wi-Fi access, with the UCG-Ultra handling the gateway
+role. Operating-mode settings, wireless configuration, management address,
+and uplink details are still to be documented.
 
 ## Core Switching
 
@@ -80,29 +78,27 @@ have not yet been verified.
 
 **Device name:** `BARDCORE-SW1`
 
-**Current operating system:** RouterOS `7.23.3 (stable)`, confirmed from
-user-supplied `/system resource print` output reported on 2026-11-11.
+**Current operating system:** RouterOS `7.23.3 (stable)`
+
+**Resource and bridge checks:** 2026-11-11
 
 The CRS326 provides the primary wired switching layer for Axiom.
-Hardware revision, serial number, and reported RouterBOOT firmware versions
+Hardware revision, serial number, and RouterBOOT firmware versions
 are recorded in [`hardware.md`](hardware.md).
 
-The bridge-port snapshot below records verified port membership and flags.
-VLAN configuration is pending, as confirmed by the owner on 2026-11-11.
-Connected-device assignments, uplink identity, management configuration, and
-other operational settings will be documented as verified.
+The port table below records bridge membership and hardware-offload flags.
+VLANs are not yet configured. Connected-device assignments, uplink identity,
+and management settings are still to be documented.
 
-Configuration details should not be inferred solely from the capabilities of
-the hardware.
+#### Bridge-Port Snapshot
 
-#### Verified Bridge-Port Snapshot
+`/interface bridge port print` — 2026-11-11:
 
-User-supplied `/interface bridge port print` output, reported on 2026-11-11,
-shows all 24 Ethernet ports and both SFP+ ports in the bridge named `bridge`.
+All 24 Ethernet ports and both SFP+ ports belong to the bridge named `bridge`.
 Every entry has `hw=yes` and the `H` hardware-offload flag. `ether2` and
 `ether23` are active; the remaining 24 entries also carry `I` (inactive).
 
-| Interface(s) | Reported flags | Observed state |
+| Interface(s) | Flags | State at check |
 | --- | --- | --- |
 | `ether1` | `IH` | Inactive; hardware-offload flag present |
 | `ether2` | `H` | Active; hardware offload active |
@@ -124,39 +120,33 @@ Shared values across all 26 entries:
 - `edge=auto`, `point-to-point=auto`
 - Comment: `defconf`
 
-The report does not identify connected devices, negotiated speeds, or which
-active port is the gateway uplink. The owner confirmed on 2026-11-11 that
-VLANs have not yet been configured. The reported PVID 1 and `admit-all`
-values describe the current port settings; VLAN segmentation remains
-planned. Bridge-level `vlan-filtering` and the bridge VLAN table were not
-included in the supplied output.
+Endpoint assignments, negotiated link speeds, and the gateway uplink port
+still need checking. All ports currently show PVID 1 and `admit-all`; VLAN
+segmentation is planned. Bridge-level `vlan-filtering` and VLAN table values
+still need to be recorded.
 
-#### Operating System Guidance
+#### Operating System and Management
 
-**Status:** RouterOS `7.23.3 (stable)` is confirmed as the running OS as of
-the user report on 2026-11-11. The recommendation is to retain RouterOS for
-managed switching. Bridge hardware offload is confirmed by the bridge-port
-snapshot above. The saved Boot OS setting still requires verification.
+BARDCORE-SW1 runs RouterOS `7.23.3 (stable)` with bridge hardware offload.
+The saved Boot OS setting still needs checking.
 
 The CRS326 supports either RouterOS or SwOS through
 [MikroTik's dual-boot feature](https://manual.mikrotik.com/hardware/crs326-24g-2s-plus-rm/).
 Only one operating system runs at a time.
 
-| Option | Fit for BARDCORE-SW1 |
+| Operating system | Management options |
 | --- | --- |
-| RouterOS | Recommended for Axiom's learning and automation goals: CLI/SSH, WinBox, scripting, configuration exports, and detailed diagnostics. It can serve as a Layer 2 switch. |
-| SwOS | Suitable when simple browser-based administration of VLANs, ports, link aggregation, and other switch functions is the priority. |
+| RouterOS | Current OS. Provides CLI/SSH, WinBox, scripting, configuration exports, and detailed diagnostics alongside Layer 2 switching. |
+| SwOS | Alternative switch OS with browser-based administration of VLANs, ports, link aggregation, and other switch functions. |
 
-The recommendation is to retain RouterOS for managed switching with the
-UCG-Ultra as the current gateway. Use one hardware-offloaded bridge; this
-switch supports bridge VLAN filtering with hardware offload when VLANs are
-introduced. Check the `H` flag on active bridge ports with
-`/interface bridge port print`. Some features disable offload and cause
-traffic to use the CPU. See
+The UCG-Ultra handles gateway duties while BARDCORE-SW1 provides switching.
+The switch has one hardware-offloaded bridge and supports bridge VLAN
+filtering with hardware offload. The `H` flag in
+`/interface bridge port print` shows whether offload is active. Some bridge
+features disable offload and send traffic through the CPU. See
 [MikroTik's bridge hardware-offload guidance](https://manual.mikrotik.com/docs/bridging-and-switching/).
 
-To refresh the inventory and verify remaining settings in RouterOS, use
-these read-only commands:
+These read-only commands check the inventory and management settings:
 
 ```routeros
 /system identity print
@@ -225,8 +215,9 @@ network-interface speeds.
 
 ## Network Segmentation
 
-**Status:** Planned. The owner confirmed on 2026-11-11 that VLANs have not yet
-been configured on `BARDCORE-SW1`.
+**Status:** Planned
+
+VLANs are not yet configured on `BARDCORE-SW1` as of 2026-11-11.
 
 The current bridge-port report shows all 26 ports with `pvid=1` and
 `frame-types=admit-all`. VLAN design and implementation are pending.

@@ -21,6 +21,21 @@ useful for future troubleshooting or review.
 Significant problems should document the observed behavior, investigation,
 root cause, resolution, verification, and lessons learned when practical.
 
+## Voice and Perspective
+
+This repository is my working record of Axiom. Write in a direct technical
+voice, with first person where it helps explain my decisions, plans, or
+lessons learned.
+
+State system roles and settings directly: "The UCG-Ultra is Axiom's primary
+gateway." Keep verification dates, commands, results, and source links
+where they help maintain the record. Avoid conversational attribution such
+as "the owner confirmed," "the user reported," or "information supplied."
+
+Describe gaps as work still to do: "The uplink port still needs checking."
+Keep Current, Available, Experimental, and Planned states accurate. Describe
+tests and implementation work as completed only when they have been done.
+
 ## System Status
 
 The following status labels may be used throughout Axiom documentation.

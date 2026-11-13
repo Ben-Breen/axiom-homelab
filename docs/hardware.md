@@ -124,19 +124,23 @@ testing, backup workflows, and data transfer.
 
 **Role:** Primary gateway for the Axiom Homelab
 
-The owner confirmed on 2026-11-12 that the UCG-Ultra now performs the
-gateway role previously documented for the Calix GigaSpire GS4220E.
-Firmware, hardware identifiers, interface assignments, and detailed gateway
-configuration have not yet been supplied.
+The UCG-Ultra is Axiom's primary gateway, replacing the Calix in that role.
+
+**Role updated:** 2026-11-12
+
+Firmware, hardware identifiers, interface assignments, and gateway settings
+are still to be documented.
 
 ### Calix GigaSpire GS4220E
 
 **Status:** Current  
 **Role:** Wi-Fi access point
 
-The owner confirmed on 2026-11-12 that the Calix currently serves as a Wi-Fi
-access point. The gateway role now belongs to the UCG-Ultra.
-Access-point configuration and physical uplink details remain unverified.
+The Calix provides Wi-Fi access. The UCG-Ultra handles the gateway role.
+
+**Role updated:** 2026-11-12
+
+Access-point settings and uplink details are still to be documented.
 
 ### MikroTik CRS326-24G-2S+RM
 
@@ -157,9 +161,9 @@ Access-point configuration and physical uplink details remain unverified.
 
 The CRS326 provides managed Ethernet switching for the Axiom Homelab.
 
-**Device inventory reported on 2026-11-11:**
+**Inventory checked:** 2026-11-11
 
-| Field | Reported value |
+| Field | Value |
 | --- | --- |
 | Hardware revision | `r2` |
 | Serial number | `HKH0AWGBYRR` |
@@ -167,22 +171,21 @@ The CRS326 provides managed Ethernet switching for the Axiom Homelab.
 | Factory RouterBOOT firmware | `7.19.6` |
 | Current RouterBOOT firmware | `7.23.3` |
 | Running operating system | RouterOS `7.23.3 (stable)` |
-| Reported `factory-software` | `6.44.6` |
+| `factory-software` | `6.44.6` |
 
 MikroTik defines the RouterBOARD factory/current firmware fields as
 [RouterBOOT bootloader versions](https://help.mikrotik.com/docs/spaces/ROS/pages/40992878/RouterBOARD).
-The separate `/system resource print` output supplied on 2026-11-11 confirms
-RouterOS `7.23.3 (stable)` is running. Its version matches the reported
-current RouterBOOT version; they remain separate software components.
+RouterOS and RouterBOOT are both at `7.23.3`. They are separate software
+components, each with its own version field.
 
 MikroTik defines `factory-software` as the minimum RouterOS version in its
 [resource field documentation](https://help.mikrotik.com/docs/spaces/ROS/pages/40992875/Resource).
-The reported value `6.44.6` is distinct from factory RouterBOOT firmware
+Here, `factory-software` is `6.44.6` and factory RouterBOOT firmware is
 `7.19.6`.
 
 #### Resource Snapshot
 
-User-supplied `/system resource print` output, reported on 2026-11-11:
+`/system resource print` — 2026-11-11:
 
 ```text
                   uptime: 13w5d19h11m6s
@@ -204,12 +207,12 @@ User-supplied `/system resource print` output, reported on 2026-11-11:
                 platform: MikroTik
 ```
 
-The collection time and build timestamp timezone were not supplied. Uptime,
-free resources, CPU load, and write counters describe this sample. Uptime
-is 96 days, 19 hours, 11 minutes, and 6 seconds since boot; it does not
-establish uninterrupted network connectivity. A separate bridge-port report
-on 2026-11-11 confirms hardware-offload flags on all 26 bridge ports, with
-`ether2` and `ether23` active. See the verified bridge-port snapshot in
+This snapshot records 96 days, 19 hours, 11 minutes, and 6 seconds since
+boot. Free memory, storage, CPU load, and write counters change over time.
+The exact collection time and build timestamp timezone are not recorded.
+
+The bridge-port check on 2026-11-11 shows hardware-offload flags on all 26
+ports, with `ether2` and `ether23` active. The port table is recorded in
 [`networking.md`](networking.md).
 
 The model supports dual boot with RouterOS or SwOS. Operating system
