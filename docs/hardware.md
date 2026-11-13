@@ -118,13 +118,25 @@ testing, backup workflows, and data transfer.
 
 ## Networking Hardware
 
+### Ubiquiti Cloud Gateway Ultra (UCG-Ultra)
+
+**Status:** Current
+
+**Role:** Primary gateway for the Axiom Homelab
+
+The owner confirmed on 2026-11-12 that the UCG-Ultra now performs the
+gateway role previously documented for the Calix GigaSpire GS4220E.
+Firmware, hardware identifiers, interface assignments, and detailed gateway
+configuration have not yet been supplied.
+
 ### Calix GigaSpire GS4220E
 
 **Status:** Current  
-**Role:** Primary residential gateway and wireless access point
+**Role:** Wi-Fi access point
 
-The Calix gateway currently provides connectivity between the Axiom network
-and the residential fiber internet service.
+The owner confirmed on 2026-11-12 that the Calix currently serves as a Wi-Fi
+access point. The gateway role now belongs to the UCG-Ultra.
+Access-point configuration and physical uplink details remain unverified.
 
 ### MikroTik CRS326-24G-2S+RM
 

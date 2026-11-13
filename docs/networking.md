@@ -15,19 +15,21 @@ interpreted as deployed infrastructure.
 
 ## Current Network Overview
 
-The Axiom network currently uses the residential fiber connection and Calix
-GigaSpire GS4220E as the primary gateway and wireless access point.
+The Axiom network uses the residential fiber connection with a Ubiquiti
+Cloud Gateway Ultra (UCG-Ultra) as its current gateway. The Calix GigaSpire
+GS4220E currently serves as a Wi-Fi access point. Both roles were confirmed
+by the owner on 2026-11-12.
 
 The MikroTik CRS326-24G-2S+RM (`BARDCORE-SW1`) provides managed Ethernet
 switching for the homelab network.
 
-At a high level:
+At a high level, the logical gateway and wired-switching path is:
 
 Internet
   |
 Residential Fiber
   |
-Calix GigaSpire GS4220E
+Ubiquiti Cloud Gateway Ultra (UCG-Ultra)
   |
 BARDCORE-SW1 (MikroTik CRS326-24G-2S+RM)
   |
@@ -35,26 +37,40 @@ BARDCORE-SW1 (MikroTik CRS326-24G-2S+RM)
   |
   +-- Additional Ethernet-connected systems as deployed
 
+The ISP handoff, gateway uplink port assignments, and the Calix's physical
+attachment have not yet been verified. The Calix's Wi-Fi role is documented
+below without assigning it an unverified connection in this overview.
+
 The Raspberry Pi systems are currently Available rather than deployed and
 therefore are not represented as active network nodes.
 
 ## Gateway
 
+### Ubiquiti Cloud Gateway Ultra (UCG-Ultra)
+
+**Status:** Current
+
+**Role:** Primary gateway for the Axiom Homelab
+
+The owner confirmed on 2026-11-12 that the gateway role now belongs to the
+UCG-Ultra, replacing the Calix in that role.
+
+WAN addressing and ISP handoff, LAN addressing, DHCP and DNS configuration,
+firewall policy, firmware version, and gateway-to-switch port assignments
+remain to be verified from the actual environment.
+
+## Wireless Access
+
 ### Calix GigaSpire GS4220E
 
-**Role:** Primary residential gateway and wireless access point
+**Status:** Current
 
-The Calix gateway currently provides connectivity between the residential
-fiber service and the local network.
+**Role:** Wi-Fi access point
 
-Its responsibilities presently include:
-
-- Internet gateway connectivity
-- Residential wireless networking
-- Connectivity to the Axiom switching infrastructure
-
-Detailed configuration should be documented here only where it materially
-affects Axiom.
+The owner confirmed on 2026-11-12 that the Calix's current role is Wi-Fi
+access. The UCG-Ultra performs the gateway role. The Calix's operating-mode
+settings, wireless configuration, management address, and physical uplink
+have not yet been verified.
 
 ## Core Switching
 
@@ -131,8 +147,8 @@ Only one operating system runs at a time.
 | RouterOS | Recommended for Axiom's learning and automation goals: CLI/SSH, WinBox, scripting, configuration exports, and detailed diagnostics. It can serve as a Layer 2 switch. |
 | SwOS | Suitable when simple browser-based administration of VLANs, ports, link aggregation, and other switch functions is the priority. |
 
-The recommendation is to retain RouterOS for managed switching while keeping
-the Calix as the current gateway. Use one hardware-offloaded bridge; this
+The recommendation is to retain RouterOS for managed switching with the
+UCG-Ultra as the current gateway. Use one hardware-offloaded bridge; this
 switch supports bridge VLAN filtering with hardware offload when VLANs are
 introduced. Check the `H` flag on active bridge ports with
 `/interface bridge port print`. Some features disable offload and cause

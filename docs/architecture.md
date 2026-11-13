@@ -35,13 +35,13 @@ The architecture is guided by several principles:
 
 ## High-Level Architecture
 
-The current and intended high-level architecture is:
+The current and intended high-level logical architecture is:
 
 Internet
    |
 Residential Fiber
    |
-Calix GigaSpire GS4220E
+Ubiquiti Cloud Gateway Ultra (UCG-Ultra)
    |
 BARDCORE-SW1 (MikroTik CRS326-24G-2S+RM)
    |
@@ -61,8 +61,11 @@ BARDCORE-SW1 (MikroTik CRS326-24G-2S+RM)
 
 Not all components shown above are currently deployed.
 
-The ASUS NUC 14 Pro Plus, Calix GigaSpire GS4220E, and `BARDCORE-SW1`
-(MikroTik CRS326-24G-2S+RM) are Current components.
+The ASUS NUC 14 Pro Plus, UCG-Ultra, Calix GigaSpire GS4220E, and
+`BARDCORE-SW1` (MikroTik CRS326-24G-2S+RM) are Current components.
+The Calix provides Wi-Fi access; its physical attachment is not shown
+because its uplink has not yet been verified. The ISP handoff and gateway
+uplink port assignments also remain unverified.
 
 The Raspberry Pi systems, Raspberry Pi NAS platform, and NETGEAR GS208v2
 are presently Available rather than deployed.
@@ -89,12 +92,18 @@ of the Axiom environment is configured, documented, and evaluated.
 
 ## Network Layer
 
+### Ubiquiti Cloud Gateway Ultra (UCG-Ultra)
+
+The UCG-Ultra is the current gateway for Axiom, as confirmed by the owner
+on 2026-11-12. Detailed WAN connectivity and gateway configuration remain
+to be documented from the actual device.
+
 ### Calix GigaSpire GS4220E
 
-The Calix GigaSpire GS4220E currently provides the primary residential
-gateway and wireless access point.
-
-It connects the Axiom environment to the residential fiber service.
+The Calix GigaSpire GS4220E currently serves as a Wi-Fi access point, as
+confirmed by the owner on 2026-11-12. Its previous gateway role has moved
+to the UCG-Ultra. Its physical uplink and access-point settings remain
+unverified.
 
 ### MikroTik CRS326-24G-2S+RM
 
